@@ -1,0 +1,24 @@
+name: rps
+
+services:
+  server:
+    build:
+      dockerfile: Dockerfile
+      context: .
+    depends_on:
+      - redis
+    volumes:
+      - ./:/usr/src/app
+    ports:
+      - "8000:8000"
+      - "5678:5678"
+    environment:
+      - name=value
+    stdin_open: true
+    tty: true
+    entrypoint: poetry run debugpy --listen 0.0.0.0:5678 manage.py runserver 0.0.0.0:8000
+
+  redis:
+    image: "redis:7.4-alpine"
+    ports:
+      - "6379:6379"

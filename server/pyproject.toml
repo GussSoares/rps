@@ -1,0 +1,32 @@
+[project]
+name = "rps-server"
+version = "0.1.0"
+description = "The RPS server"
+authors = [
+    {name = "Gustavo Soares",email = "gustavo.soares@seplag.ce.gov.br"}
+]
+license = {text = "MIT"}
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "django (>=5.2,<6.0)",
+    "djangorestframework (>=3.16.0,<4.0.0)",
+    "toml (>=0.10.2,<0.11.0)",
+    "djangorestframework-simplejwt (>=5.5.0,<6.0.0)",
+    "gunicorn (>=23.0.0,<24.0.0)",
+    "django-redis (>=5.4.0,<6.0.0)",
+    "drf-yasg (>=1.21.10,<2.0.0)",
+    "django-cors-headers (>=4.7.0,<5.0.0)",
+]
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.group.dev.dependencies]
+debugpy = "^1.8.13"
+ruff = "^0.11.4"
+
+[tool.poetry]
+package-mode = false
+
