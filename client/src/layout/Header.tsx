@@ -1,11 +1,23 @@
 import { useAuth } from "@/context/AuthProvider"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { DropdownMenu } from "@radix-ui/react-dropdown-menu"
-import { DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "./ui/dropdown-menu"
+import { DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "../components/ui/dropdown-menu"
+import { useNavigate } from "react-router";
+import { toast } from "sonner";
 
 
 export function Header() {
   const { logout } = useAuth();
+  const navigate = useNavigate();
+
+  const localLogout = () => {
+    logout();
+    navigate("/login")
+    toast.warning("Deslogado com sucesso", {
+      richColors: true,
+      position: "top-center"
+    })
+  }
   return (
     <header className="bg-gray-300 fixed top-0 left-0 w-full shadow-md py-4 px-6 z-50 flex justify-between items-center">
       <h1 className="text-xl font-semibold">Minha Aplicação</h1>
@@ -19,7 +31,7 @@ export function Header() {
         <DropdownMenuContent>
           <DropdownMenuLabel>My Account</DropdownMenuLabel>
           <DropdownMenuSeparator />
-          <DropdownMenuItem onClick={() => logout()}>
+          <DropdownMenuItem onClick={() => localLogout()}>
             Logout
           </DropdownMenuItem>
         </DropdownMenuContent>

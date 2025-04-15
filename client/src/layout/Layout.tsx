@@ -5,7 +5,7 @@ import { Header } from "./Header";
 import { Footer } from "./Footer";
 
 type LayoutProps = {
-	children: ReactNode;
+	children?: ReactNode;
 };
 
 export default function AppLayout({ children }: LayoutProps) {

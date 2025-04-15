@@ -1,14 +1,14 @@
 import { loginRequest } from "@/api/auth";
 import { api } from "@/hooks/use-axios";
 import { createContext, ReactNode, useContext, useEffect, useState } from "react";
-// import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router";
 import { toast } from "sonner";
 
 type UserContextType = {
 	token: string | null;
-	login: (username: string, password: string) => void;
+	login: (username: string, password: string) => Promise<any>;
 	logout: () => void;
-	isLogged: () => boolean;
+	isLogged: boolean;
 	loading: boolean;
 };
 
@@ -40,7 +40,7 @@ export const UserProvider = ({ children }: Props) => {
 
 	const login = (username: string, password: string) => {
 		setLoading(true);
-		loginRequest({ username, password })
+		return loginRequest({ username, password })
 			.then(res => {
 				localStorage.setItem("token", res.data.token);
 				setToken(res.data.token);
@@ -61,9 +61,7 @@ export const UserProvider = ({ children }: Props) => {
 		// navigate("/login");
 	}
 
-	const isLogged = () => {
-		return !!token;
-	}
+	const isLogged = !!token;
 
 	return (
 		<UserContext.Provider value={{ login, logout, token, isLogged, loading }}>

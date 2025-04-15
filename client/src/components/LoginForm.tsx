@@ -13,8 +13,8 @@ import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 import { Loader2 } from "lucide-react";
 import { useAuth } from "@/context/AuthProvider";
-import { Toaster } from "sonner";
 import { PasswordInput } from "./ui/input-password";
+import {useNavigate} from "react-router";
 
 const loginSchema = z.object({
 	username: z.string().min(7, "Must be greater 7 characters"),
@@ -26,24 +26,27 @@ type createUserFormData = z.infer<typeof loginSchema>
 
 export function LoginForm() {
 	const { login, loading } = useAuth();
+	const navigate = useNavigate();
 
 	const form = useForm<createUserFormData>({
 		resolver: zodResolver(loginSchema)
 	});
 
-	const loginHandler = (formData: any) => {
+	const loginHandler = async (formData: any) => {
 		const result = loginSchema.safeParse(formData)
 
 		if (result.success) {
 			let { username, password } = result.data;
 
-			login(username, password);
+			await login(username, password)
+				.then(() => {
+					navigate("/");
+				});
 		}
 	}
 
 	return (
 		<>
-			<Toaster />
 			<Form {...form}>
 				<form onSubmit={form.handleSubmit(loginHandler)}>
 					<div className="grid w-full items-center gap-4">
@@ -70,7 +73,6 @@ export function LoginForm() {
 									<FormItem>
 										<FormLabel>Password</FormLabel>
 										<FormControl>
-											{/* <Input type="password" placeholder="Password" {...field} /> */}
 											<PasswordInput placeholder="Password" {...field} />
 										</FormControl>
 										<FormMessage />

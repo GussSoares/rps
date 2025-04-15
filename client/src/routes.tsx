@@ -1,15 +1,9 @@
-import { Login } from "@/pages/Login";
-import { Home } from "@/pages/Home";
-import { Route, Routes } from "react-router-dom";
+import { Navigate } from "react-router";
+import App from "./App";
+import { useAuth } from "./context/AuthProvider";
 
+export const ProtectedRoutes = () => {
+  const { isLogged } = useAuth();
 
-const MainRoutes = () => {
-  return (
-    <Routes>
-      <Route element={<Home/>} path="/" />
-      <Route element={<Login/>} path="/login" />
-    </Routes>
-  )
-}
-
-export default MainRoutes;
+	return isLogged ? <App /> : <Navigate to="/login" replace />;
+};
