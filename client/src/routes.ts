@@ -1,9 +1,7 @@
 // import App from "./App";
-import { createBrowserRouter } from "react-router";
-import { Dashboard } from "./pages/Dashboard";
-import { Login } from "./pages";
-import { Home } from "./pages/Home";
-import { ProtectedRoutes } from "@/routes.tsx"
+import { createBrowserRouter } from "react-router-dom";
+import { ProtectedRoutes } from "@/protected-routes"
+import { Dashboard, Login, Home, User } from "./pages";
 
 
 export const router = createBrowserRouter([
@@ -13,6 +11,7 @@ export const router = createBrowserRouter([
     children: [
       { index: true, Component: Home },
       { path: "dashboard", Component: Dashboard },
+      { path: "user", Component: User}
     ],
   },
   {

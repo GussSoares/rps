@@ -16,7 +16,12 @@ type ILogin = {
     password: string
 }
 
+type IRefreshToken = {
+    refreshToken: string;
+}
+
 export type {
     IRequest,
-    ILogin
+    ILogin,
+    IRefreshToken
 };

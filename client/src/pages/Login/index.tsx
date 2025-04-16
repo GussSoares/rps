@@ -1,8 +1,21 @@
-import { Card, CardTitle, CardContent, CardHeader, CardDescription } from "@/components/ui/card"
 import "./Login.css"
+import { Card, CardTitle, CardContent, CardHeader, CardDescription } from "@/components/ui/card"
 import { LoginForm } from "@/components/LoginForm"
+import { useAuth } from "@/context/AuthProvider"
+import { useNavigate, useLocation } from "react-router-dom";
+import { useEffect } from "react";
 
 export function Login() {
+	const navigate = useNavigate();
+	const location = useLocation();
+	const { isLogged } = useAuth();
+
+	useEffect(() => {
+		if (isLogged && location.pathname.includes("/login")) {
+			navigate("/");
+		}
+	}, [isLogged])
+	
 	return (
 		<div className="background-login w-full p-4">
 			<main role="main" className="w-full flex flex-col h-screen content-center justify-center">

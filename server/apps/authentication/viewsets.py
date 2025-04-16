@@ -6,6 +6,7 @@ from rest_framework import status
 from rest_framework.viewsets import ViewSet
 from rest_framework.request import Request
 from rest_framework.response import Response
+from rest_framework_simplejwt.tokens import RefreshToken
 
 from apps.authentication.authentication import JWTAuthentication
 from apps.authentication import serializers
@@ -60,6 +61,11 @@ class AuthViewSet(PublicViewSet):
         user = serializer.save()
 
         return Response(serializers.UserSerializer(user).data, status=status.HTTP_201_CREATED)
+
+    def logout(self, request: Request):
+        refresh = request.data['refresh']
+        RefreshToken(refresh).blacklist()
+        return Response(status=status.HTTP_205_RESET_CONTENT)
 
 
 class UserViewSet(ViewSet):

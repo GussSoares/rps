@@ -12,8 +12,7 @@ export default function AppLayout({ children }: LayoutProps) {
 	return (
 		<div className="flex flex-col min-h-screen">
 			<Header />
-			<div className="h-16" />
-			<main className="min-h-screen px-6 py-4 bg-gray-50 pb-20">
+			<main className="min-h-screen px-6 py-4 bg-gray-50 pb-20" style={{paddingTop: '5em'}}>
 				{children}
 			</main>
 			<Footer />

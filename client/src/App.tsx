@@ -1,6 +1,6 @@
 import './App.css'
 import AppLayout from './layout/Layout'
-import { Outlet } from 'react-router'
+import { Outlet } from 'react-router-dom'
 
 function App() {
   return (

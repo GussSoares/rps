@@ -14,7 +14,6 @@ import { Button } from "./ui/button";
 import { Loader2 } from "lucide-react";
 import { useAuth } from "@/context/AuthProvider";
 import { PasswordInput } from "./ui/input-password";
-import {useNavigate} from "react-router";
 
 const loginSchema = z.object({
 	username: z.string().min(7, "Must be greater 7 characters"),
@@ -26,22 +25,18 @@ type createUserFormData = z.infer<typeof loginSchema>
 
 export function LoginForm() {
 	const { login, loading } = useAuth();
-	const navigate = useNavigate();
 
 	const form = useForm<createUserFormData>({
 		resolver: zodResolver(loginSchema)
 	});
 
-	const loginHandler = async (formData: any) => {
+	const loginHandler = (formData: any) => {
 		const result = loginSchema.safeParse(formData)
 
 		if (result.success) {
 			let { username, password } = result.data;
 
-			await login(username, password)
-				.then(() => {
-					navigate("/");
-				});
+			login(username, password)
 		}
 	}
 
