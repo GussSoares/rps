@@ -4,6 +4,7 @@ import { DropdownMenu } from "@radix-ui/react-dropdown-menu"
 import { DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "../components/ui/dropdown-menu"
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { SidebarTrigger } from "@/components/ui/sidebar";
 
 
 export function Header() {
@@ -15,7 +16,9 @@ export function Header() {
     navigate("/login")
   }
   return (
-    <header className="bg-gray-300 fixed top-0 left-0 w-full shadow-md py-4 px-6 z-50 flex justify-between items-center">
+    // bg-blue-600 text-white p-4
+    <header className="bg-gray-300 top-0 left-0 w-full shadow-md py-4 px-6 z-50 flex justify-between items-center">
+      <SidebarTrigger />
       <h1 className="text-xl font-semibold">Minha Aplicação</h1>
       <DropdownMenu>
         <DropdownMenuTrigger>

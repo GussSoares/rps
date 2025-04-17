@@ -5,7 +5,7 @@ export const loginRequest = ({ username, password }: ILogin) => {
     return api.request({
         method: 'POST',
         data: { username, password },
-        url: 'auth/token'
+        url: 'auth/token/'
     });
 }
 
@@ -13,7 +13,7 @@ export const refreshTokenRequest = () => {
     return api.request({
         method: 'POST',
         data: { refresh: localStorage.getItem('refreshToken') },
-        url: 'auth/token/refresh',
+        url: 'auth/token/refresh/',
     });
 }
 
@@ -35,13 +35,13 @@ export const logoutRequest = () => {
     return api.request({
         method: 'POST',
         data: { refresh: localStorage.getItem('refreshToken') },
-        url: 'auth/logout'
+        url: 'auth/logout/'
     })
 }
 
 export const userRequest = () => {
     return api.request({
         method: 'GET',
-        url: 'auth/user'
+        url: 'auth/user/'
     })
 }

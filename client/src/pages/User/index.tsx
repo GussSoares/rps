@@ -26,7 +26,6 @@ export function User() {
 		setLoading(true);
 		userRequest()
 			.then(res => {
-				console.log(res)
 				setUser(mapUserData(res.data))
 			})
 			.catch(err => {

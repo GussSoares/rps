@@ -1,12 +1,12 @@
 import "./Login.css"
 import { Card, CardTitle, CardContent, CardHeader, CardDescription } from "@/components/ui/card"
-import { LoginForm } from "@/components/LoginForm"
 import { useAuth } from "@/context/AuthProvider"
 import { useNavigate, useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
+import { RegisterForm } from "@/components/RegisterForm";
 
-export function Login() {
+export function Register() {
 	const navigate = useNavigate();
 	const location = useLocation();
 	const { isLogged } = useAuth();
@@ -23,13 +23,13 @@ export function Login() {
 				<div className="w-full sm:w-1/2 lg:w-1/3 bg-gray-50 rounded-xl m-auto">
 					<Card>
 						<CardHeader>
-							<CardTitle>Sign In</CardTitle>
-							<CardDescription>Make the sign in to enter in the system</CardDescription>
+							<CardTitle>Sign Up</CardTitle>
+							<CardDescription>Make the login to enter in the system</CardDescription>
 						</CardHeader>
 						<CardContent>
-							<LoginForm />
+							<RegisterForm />
 							<div className="text-center">
-								<span>Don't have an account? <Link to="/register"><b>Sign up now</b></Link>.</span>
+								<span>Already have an account? <Link to="/login"><b>Sign in now</b></Link>.</span>
 							</div>
 						</CardContent>
 					</Card>

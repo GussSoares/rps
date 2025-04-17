@@ -49,7 +49,6 @@ api.interceptors.response.use(
 
       return refreshTokenRequest()
         .then((res) => {
-          console.log(res);
           localStorage.setItem("accessToken", res.data.access);
           localStorage.setItem("refreshToken", res.data.refresh);
           originalRequest.headers['Authorization'] = `Bearer ${res.data.access}`;
