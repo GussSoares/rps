@@ -15,6 +15,7 @@ import { Loader2 } from "lucide-react";
 import { useAuth } from "@/context/AuthProvider";
 import { PasswordInput } from "./ui/input-password";
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "./ui/select";
+import { useNavigate } from "react-router-dom";
 
 
 const genderChoices = [
@@ -43,26 +44,26 @@ const registerSchema = z.object({
 type registerUserFormData = z.infer<typeof registerSchema>
 
 export function RegisterForm() {
-	const { login, loading } = useAuth();
+	const { register, loading } = useAuth();
+	const navigate = useNavigate()
 
 	const form = useForm<registerUserFormData>({
 		resolver: zodResolver(registerSchema)
 	});
 
-	const loginHandler = (formData: any) => {
+	const registerHandler = async (formData: any) => {
 		const result = registerSchema.safeParse(formData)
 
 		if (result.success) {
-			let { username, password } = result.data;
-
-			login(username, password)
+			await register(result.data)
+			navigate("/login");
 		}
 	}
 
 	return (
 		<>
 			<Form {...form}>
-				<form onSubmit={form.handleSubmit(loginHandler)}>
+				<form onSubmit={form.handleSubmit(registerHandler)}>
 					<div className="grid grid-cols-2 w-full gap-4">
 						{/* Firstname */}
 						<div className="space-y-1.5">
@@ -192,8 +193,8 @@ export function RegisterForm() {
 							/>
 						</div>
 						<div className="col-span-2 space-y-1.5">
-							<Button className=""  disabled={loading} type="submit">
-								{loading && <Loader2 className="animate-spin" />} Login
+							<Button className="w-full" disabled={loading} type="submit">
+								{loading && <Loader2 className="animate-spin" />} Register
 							</Button>
 						</div>
 					</div>

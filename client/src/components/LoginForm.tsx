@@ -30,13 +30,13 @@ export function LoginForm() {
 		resolver: zodResolver(loginSchema)
 	});
 
-	const loginHandler = (formData: any) => {
+	const loginHandler = async (formData: any) => {
 		const result = loginSchema.safeParse(formData)
 
 		if (result.success) {
 			let { username, password } = result.data;
 
-			login(username, password)
+			await login(username, password)
 		}
 	}
 

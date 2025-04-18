@@ -1,4 +1,3 @@
-import { Breadcrumb } from "@/components/Breadcrumb";
 import { Button } from "@/components/ui/button";
 import { ChevronRight } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -7,7 +6,6 @@ import { Link } from "react-router-dom";
 export function Home() {
 	return (
 		<>
-			<Breadcrumb />
 			<h1>HOME</h1>
 			<Button variant="ghost">
 				<ChevronRight />

@@ -36,14 +36,17 @@ class MessageSerializer(serializers.Serializer):
 
 
 class RegisterSerializer(serializers.ModelSerializer):
+    confirm_password = serializers.CharField()
+
     class Meta:
         model = User
-        fields = ('username', 'password', 'first_name', 'last_name', 'email', 'phone', 'gender', 'country', 'city', 'state')
+        fields = ('username', 'password', 'confirm_password', 'first_name', 'last_name', 'email', 'phone', 'gender', 'country', 'city', 'state')
 
     def validate(self, attrs):
         return super().validate(attrs)
 
     def save(self, **kwargs):
+        self.validated_data.pop('confirm_password')
         user = super().save(**kwargs)
         user.set_password(user.password)
         user.save()

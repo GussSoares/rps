@@ -1,20 +1,42 @@
-import { ILogin } from "@/hooks/types";
+import { ILogin, IRegister } from "@/hooks/types";
 import { api } from "@/services/api";
 
 export const loginRequest = ({ username, password }: ILogin) => {
-    return api.request({
-        method: 'POST',
-        data: { username, password },
-        url: 'auth/token/'
-    });
+  return api.request({
+    method: 'POST',
+    data: { username, password },
+    url: 'auth/token/'
+  });
+}
+
+export const registerRequest = ({
+  firstname,
+  lastname,
+  username,
+  email,
+  password,
+  confirmPassword
+}: IRegister) => {
+  return api.request({
+    method: 'POST',
+    data: { 
+      username,
+      first_name: firstname,
+      last_name: lastname,
+      email,
+      password,
+      confirm_password: confirmPassword
+    },
+    url: 'auth/register/'
+  });
 }
 
 export const refreshTokenRequest = () => {
-    return api.request({
-        method: 'POST',
-        data: { refresh: localStorage.getItem('refreshToken') },
-        url: 'auth/token/refresh/',
-    });
+  return api.request({
+    method: 'POST',
+    data: { refresh: localStorage.getItem('refreshToken') },
+    url: 'auth/token/refresh/',
+  });
 }
 
 // export const refreshTokenRequest = async () => {
@@ -32,16 +54,16 @@ export const refreshTokenRequest = () => {
 // }
 
 export const logoutRequest = () => {
-    return api.request({
-        method: 'POST',
-        data: { refresh: localStorage.getItem('refreshToken') },
-        url: 'auth/logout/'
-    })
+  return api.request({
+    method: 'POST',
+    data: { refresh: localStorage.getItem('refreshToken') },
+    url: 'auth/logout/'
+  })
 }
 
 export const userRequest = () => {
-    return api.request({
-        method: 'GET',
-        url: 'auth/user/'
-    })
+  return api.request({
+    method: 'GET',
+    url: 'auth/user/'
+  })
 }

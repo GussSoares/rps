@@ -1,4 +1,3 @@
-import { Breadcrumb } from "@/components/Breadcrumb";
 import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
 import { userRequest } from "@/services/auth";
@@ -38,7 +37,6 @@ export function User() {
 
 	return (
 		<>
-			<Breadcrumb />
 			<h1>USER</h1>
 
 			{

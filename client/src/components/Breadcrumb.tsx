@@ -26,7 +26,7 @@ const BREADCRUMB: RouteMap = {
 }
 
 
-export const Breadcrumb = () => {
+export const Breadcrumb = (props: React.HtmlHTMLAttributes<HTMLElement>) => {
   const [bcrumb, setBcrumb] = useState<Crumb[] | []>([])
   let breadcrumb: Crumb[] = [];
   let currentUrl = location.href;
@@ -43,7 +43,7 @@ export const Breadcrumb = () => {
   }, [currentUrl])
 
   return (
-    <ShadCNBreadCrumb>
+    <ShadCNBreadCrumb {...props}>
       <BreadcrumbList>
         <BreadcrumbItem>RPS</BreadcrumbItem>
         {
