@@ -9,6 +9,22 @@ export const loginRequest = ({ username, password }: ILogin) => {
   });
 }
 
+export const loginWithGoogleRequest = async (code: string) => {
+  try {
+    const response = await api.request({
+      method: 'POST',
+      data: {code},
+      url: 'auth/login/google'
+    });
+    return response.data;
+  } catch (err: any) {
+    if (err.response) {
+      throw new Error(`Erro ${err.response.status}`);
+    }
+    throw new Error(`Ocorreu um erro inesperado.`);
+  }
+} 
+
 export const registerRequest = ({
   firstname,
   lastname,
@@ -19,7 +35,7 @@ export const registerRequest = ({
 }: IRegister) => {
   return api.request({
     method: 'POST',
-    data: { 
+    data: {
       username,
       first_name: firstname,
       last_name: lastname,
@@ -61,9 +77,18 @@ export const logoutRequest = () => {
   })
 }
 
-export const userRequest = () => {
-  return api.request({
-    method: 'GET',
-    url: 'auth/user/'
-  })
+export const userRequest = async () => {
+  try {
+    const response = await api.request({
+      method: 'GET',
+      url: 'auth/user/'
+    });
+    return response.data;
+  } catch (err: any) {
+    if (err.response) {
+      throw new Error(`Erro ${err.response.status}`);
+    }
+    throw new Error(`Ocorreu um erro inesperado.`);
+  }
+
 }

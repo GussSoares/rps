@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Breadcrumb as ShadCNBreadCrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbSeparator } from "./ui/breadcrumb";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 type Crumb = { path: string; label: string };
 
 type RouteMap = {
   user: Crumb;
+  users: Crumb;
   home: Crumb;
   dashboard: Crumb;
 };
@@ -14,6 +15,10 @@ const BREADCRUMB: RouteMap = {
   user: {
     path: '/user',
     label: 'Usuário'
+  },
+  users: {
+    path: '/users',
+    label: 'Usuários'
   },
   home: {
     path: '/',
@@ -29,10 +34,10 @@ const BREADCRUMB: RouteMap = {
 export const Breadcrumb = (props: React.HtmlHTMLAttributes<HTMLElement>) => {
   const [bcrumb, setBcrumb] = useState<Crumb[] | []>([])
   let breadcrumb: Crumb[] = [];
-  let currentUrl = location.href;
+  const location = useLocation();
 
   useEffect(() => {
-    breadcrumb = currentUrl.split('/').map((value) => {
+    breadcrumb = location.pathname.split('/').map((value) => {
       if (value === '') {
         value = 'home'
       }
@@ -40,7 +45,7 @@ export const Breadcrumb = (props: React.HtmlHTMLAttributes<HTMLElement>) => {
     }).filter(Boolean);
 
     setBcrumb(Array.from(new Set(breadcrumb)))
-  }, [currentUrl])
+  }, [location])
 
   return (
     <ShadCNBreadCrumb {...props}>

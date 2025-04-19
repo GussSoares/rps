@@ -2,9 +2,9 @@ import './App.css'
 import AppLayout from './layout/Layout'
 import { Outlet } from 'react-router-dom'
 
-function App() {
+const App = (props: React.HtmlHTMLAttributes<HTMLElement>) => {
   return (
-    <AppLayout>
+    <AppLayout {...props}>
       <Outlet />
     </AppLayout>
   )

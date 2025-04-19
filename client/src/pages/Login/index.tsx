@@ -1,10 +1,10 @@
-import "./Login.css"
 import { Card, CardTitle, CardContent, CardHeader, CardDescription } from "@/components/ui/card"
 import { LoginForm } from "@/components/LoginForm"
 import { useAuth } from "@/context/AuthProvider"
 import { useNavigate, useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
+import { Command } from "lucide-react";
 
 export function Login() {
 	const navigate = useNavigate();
@@ -18,9 +18,13 @@ export function Login() {
 	}, [isLogged])
 
 	return (
-		<div className="background-login w-full p-4">
+		<div>
 			<main role="main" className="w-full flex flex-col h-screen content-center justify-center">
-				<div className="w-full sm:w-1/2 lg:w-1/3 bg-gray-50 rounded-xl m-auto">
+				<div className="lg:w-1/4 rounded-xl m-auto">
+					<div className="flex text-2xl font-medium justify-center items-center gap-2 pb-3">
+						<Command />
+						<h1>RPS</h1>
+					</div>
 					<Card>
 						<CardHeader>
 							<CardTitle>Sign In</CardTitle>

@@ -8,8 +8,9 @@ from rest_framework.request import Request
 from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import RefreshToken
 
-from apps.authentication.authentication import JWTAuthentication
 from apps.authentication import serializers
+from apps.authentication.authentication import JWTAuthentication
+from apps.authentication.google import GoogleClient
 
 
 class PublicViewSet(ViewSet):
@@ -66,6 +67,28 @@ class AuthViewSet(PublicViewSet):
         refresh = request.data['refresh']
         RefreshToken(refresh).blacklist()
         return Response(status=status.HTTP_205_RESET_CONTENT)
+
+
+class AuthWithGoogleViewSet(PublicViewSet):
+    def login(self, request):
+        serializer = serializers.LoginWithGoogleSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+
+        User = get_user_model()
+
+        access_token = GoogleClient.get_token(code=serializer.data['code'])
+        user_info = GoogleClient.get_user_info(access_token=access_token)
+
+        email = user_info["email"]
+        name = user_info.get("name", email)
+
+        user, _ = User.objects.get_or_create(email=email, defaults={"username": email, "first_name": name})
+
+        refresh = RefreshToken.for_user(user)
+        return Response({
+            "access": str(refresh.access_token),
+            "refresh": str(refresh),
+        })
 
 
 class UserViewSet(ViewSet):

@@ -135,6 +135,12 @@ async function getData(): Promise<Payment[]> {
       status: "pending",
       email: "m@example.com",
     },
+    {
+      id: "728ed52g",
+      amount: 101,
+      status: "success",
+      email: "madada@example.com",
+    },
     // ...
   ]
 }

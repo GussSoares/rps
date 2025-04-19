@@ -1,43 +1,15 @@
 import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
-import { userRequest } from "@/services/auth";
-import { useEffect, useState } from "react";
-
-type User = {
-	username: string;
-	email: string;
-	isSuperUser: boolean;
-}
-
-const mapUserData = (data: any) => {
-	return {
-		username: data.username,
-		email: data.email,
-		isSuperUser: data.is_superuser
-	}
-}
+import { useUser } from "@/hooks/use-user";
 
 export function User() {
-	const [user, setUser] = useState<User>();
-	const [loading, setLoading] = useState(false);
+	const { user, loading, error } = useUser();
 
-	useEffect(() => {
-		setLoading(true);
-		userRequest()
-			.then(res => {
-				setUser(mapUserData(res.data))
-			})
-			.catch(err => {
-				console.log({err})
-			})
-			.finally(() => {
-				setLoading(false);
-			});
-	}, []);
+	if (error) return <div>Erro ao obter dados do usuário</div>
 
 	return (
 		<>
-			<h1>USER</h1>
+			<h1 className="text-xl font-semibold">USER</h1>
 
 			{
 				loading
@@ -54,15 +26,13 @@ export function User() {
 							<p>Name: {user?.username}</p>
 							<p>Email: {user?.email}</p>
 							<p>Role: {
-								user?.isSuperUser
+								user?.is_superuser
 									? <Badge variant="default">superuser</Badge>
 									: <Badge variant="default">default</Badge>
 							}</p>
 						</>
 					)
 			}
-
-
 		</>
 	)
 }

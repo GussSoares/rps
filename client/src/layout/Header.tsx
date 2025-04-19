@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { SidebarTrigger } from "@/components/ui/sidebar";
 import { LogOut, User } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 
 export const Header = (props: React.HTMLAttributes<HTMLElement>) => {
@@ -19,9 +20,12 @@ export const Header = (props: React.HTMLAttributes<HTMLElement>) => {
 
   return (
     // bg-blue-600 text-white p-4
-    <header className="bg-gray-300 top-0 left-0 w-full shadow-md py-4 px-6 z-50 flex justify-between items-center" {...props}>
-      <SidebarTrigger style={{cursor: "pointer"}} />
-      
+    // <header className="bg-gray-300 top-0 left-0 w-full shadow-md py-4 px-6 z-50 flex justify-between items-center" {...props}>
+    <header className="top-0 left-0 w-full py-4 px-4 z-50 flex justify-between items-center" {...props}>
+      <Button variant="outline" asChild style={{cursor: "pointer"}}>
+        <SidebarTrigger />
+      </Button>
+
       <h1 className="text-xl font-semibold">Minha Aplicação</h1>
       <DropdownMenu>
         <DropdownMenuTrigger style={{ cursor: 'pointer' }}>
@@ -44,7 +48,7 @@ export const Header = (props: React.HTMLAttributes<HTMLElement>) => {
           <DropdownMenuSeparator />
           <DropdownMenuItem>
             <User />
-            <Link to="user">
+            <Link to="/user">
               Profile
             </Link>
           </DropdownMenuItem>

@@ -1,23 +1,23 @@
-import { Home, ChartArea, Users2 } from "lucide-react"
+import { ChartArea, Users2, LayoutGrid } from "lucide-react"
 
 import {
   Sidebar,
   SidebarContent,
   SidebarGroup,
   SidebarGroupContent,
-  SidebarGroupLabel,
+  SidebarHeader,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar"
-import { Link } from "react-router-dom"
+import { Link, useLocation } from "react-router-dom"
 
 // Menu items.
 const items = [
   {
     title: "Home",
     url: "/",
-    icon: Home,
+    icon: LayoutGrid,
   },
   {
     title: "Dashboard",
@@ -42,16 +42,20 @@ const items = [
 ]
 
 export function AppSidebar() {
+  const location = useLocation()
+
   return (
-    <Sidebar>
-      <SidebarContent>
+    <Sidebar variant="floating">
+      <SidebarHeader className="p-4 bg-white rounded-t-xl">
+        <h1>RPS</h1>
+      </SidebarHeader>
+      <SidebarContent className="bg-white rounded-b-xl">
         <SidebarGroup>
-          <SidebarGroupLabel>RPS</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               {items.map((item) => (
                 <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton asChild>
+                  <SidebarMenuButton asChild isActive={item.url === location.pathname}>
                     <Link to={item.url}>
                       <item.icon />
                       <span>{item.title}</span>

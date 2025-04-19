@@ -1,12 +1,13 @@
 import { IRegister, IUser } from "@/hooks/types";
-import { loginRequest, logoutRequest, registerRequest, userRequest } from "@/services/auth";
+import { loginRequest, loginWithGoogleRequest, logoutRequest, registerRequest, userRequest } from "@/services/auth";
 import { createContext, ReactNode, useContext, useEffect, useMemo, useState } from "react";
 import { toast } from "sonner";
 
 type UserContextType = {
 	token: string | null;
-	user: IUser| null;
+	user: IUser | null;
 	login: (username: string, password: string) => Promise<any>;
+	loginWithGoogle: (code: string) => Promise<any>;
 	register: (data: IRegister) => Promise<any>;
 	logout: () => void;
 	isLogged: boolean;
@@ -90,11 +91,24 @@ export const UserProvider = ({ children }: Props) => {
 			})
 	}
 
+	const loginWithGoogle = async (code: string) => {
+		try {
+			const data = await loginWithGoogleRequest(code);
+			localStorage.setItem("accessToken", data.access);
+			localStorage.setItem("refreshToken", data.refresh);
+			setToken(data.access);
+			getUserData()
+			toast.success("Login Successed!", { position: 'top-center', richColors: true });
+
+		} catch (err: any) {
+			console.log(err);
+			toast.error(err.response.data.message, { position: 'top-center', richColors: true });
+		}
+	}
+
 	const getUserData = async () => {
-		userRequest()
-			.then(({data}) => {
-				setUser({...data})
-			})
+		const userData = await userRequest();
+		setUser({ ...userData })
 	}
 
 	const isLogged = useMemo(() => {
@@ -102,7 +116,7 @@ export const UserProvider = ({ children }: Props) => {
 	}, [token]);
 
 	return (
-		<UserContext.Provider value={{ login, logout, register, token, isLogged, loading, user }}>
+		<UserContext.Provider value={{ login, logout, register, token, isLogged, loading, user, loginWithGoogle }}>
 			{children}
 		</UserContext.Provider>
 	)
