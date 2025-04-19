@@ -27,8 +27,14 @@ class LoginSerializer(serializers.Serializer):
     password = serializers.CharField()
 
 
-class LoginWithGoogleSerializer(serializers.Serializer):
+class LoginOAuthSerializer(serializers.Serializer):
     code = serializers.CharField()
+
+
+class LoginWithGoogleSerializer(LoginOAuthSerializer): ...
+
+
+class LoginWithGithubSerializer(LoginOAuthSerializer): ...
 
 
 class TokenResponseSerializer(serializers.Serializer):

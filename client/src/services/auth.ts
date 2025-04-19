@@ -13,7 +13,7 @@ export const loginWithGoogleRequest = async (code: string) => {
   try {
     const response = await api.request({
       method: 'POST',
-      data: {code},
+      data: { code },
       url: 'auth/login/google'
     });
     return response.data;
@@ -23,7 +23,7 @@ export const loginWithGoogleRequest = async (code: string) => {
     }
     throw new Error(`Ocorreu um erro inesperado.`);
   }
-} 
+}
 
 export const registerRequest = ({
   firstname,
@@ -47,27 +47,15 @@ export const registerRequest = ({
   });
 }
 
-export const refreshTokenRequest = () => {
-  return api.request({
+export const refreshTokenRequest = async () => {
+  const response = await api.request({
     method: 'POST',
     data: { refresh: localStorage.getItem('refreshToken') },
     url: 'auth/token/refresh/',
+    headers: {}
   });
+  return response.data
 }
-
-// export const refreshTokenRequest = async () => {
-//   try {
-//     const response = await api.request({
-//       method: 'POST',
-//       data: { refresh: localStorage.getItem('refreshToken') },
-//       url: 'auth/token/refresh',
-//     });
-//     return response.data
-//   } catch (err) {
-//     console.log(err)
-//     toast.error("Ocorreu um erro", {richColors: true, position: "top-center"})
-//   }  
-// }
 
 export const logoutRequest = () => {
   return api.request({
@@ -78,17 +66,9 @@ export const logoutRequest = () => {
 }
 
 export const userRequest = async () => {
-  try {
-    const response = await api.request({
-      method: 'GET',
-      url: 'auth/user/'
-    });
-    return response.data;
-  } catch (err: any) {
-    if (err.response) {
-      throw new Error(`Erro ${err.response.status}`);
-    }
-    throw new Error(`Ocorreu um erro inesperado.`);
-  }
-
+  const response = await api.request({
+    method: 'GET',
+    url: 'auth/user/'
+  });
+  return response.data;
 }

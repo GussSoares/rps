@@ -91,6 +91,28 @@ class AuthWithGoogleViewSet(PublicViewSet):
         })
 
 
+class AuthWithGithubViewSet(PublicViewSet):
+    def login(self, request):
+        serializer = serializers.LoginWithGithubSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+
+        User = get_user_model()
+
+        access_token = GoogleClient.get_token(code=serializer.data['code'])
+        user_info = GoogleClient.get_user_info(access_token=access_token)
+
+        email = user_info["email"]
+        name = user_info.get("name", email)
+
+        user, _ = User.objects.get_or_create(email=email, defaults={"username": email, "first_name": name})
+
+        refresh = RefreshToken.for_user(user)
+        return Response({
+            "access": str(refresh.access_token),
+            "refresh": str(refresh),
+        })
+
+
 class UserViewSet(ViewSet):
     def get(self, request: Request):
         return Response(serializers.UserSerializer(request.user).data, status=status.HTTP_200_OK)
