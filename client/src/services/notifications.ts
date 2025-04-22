@@ -16,3 +16,11 @@ export const getNotifications = async () => {
   });
   return response.data
 }
+
+export const readNotificationRequest = async (id: string) => {
+  const response = await api.request({
+    method: 'POST',
+    url: `notification/read/${id}/`,
+  });
+  return response.data
+}

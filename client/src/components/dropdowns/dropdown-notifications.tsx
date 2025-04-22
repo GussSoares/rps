@@ -1,7 +1,8 @@
-import { Bell, LogIn } from "lucide-react"
+import { Bell, CheckCheck, LogIn } from "lucide-react"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "../ui/dropdown-menu"
-import { getNotifications } from "@/services/notifications"
-import { useEffect, useState } from "react"
+import { getNotifications, readNotificationRequest } from "@/services/notifications"
+import { useState } from "react"
+import { Button } from "../ui/button"
 
 type INotification = {
   id: string;
@@ -10,37 +11,46 @@ type INotification = {
 }
 
 export const DropdownNotifications = () => {
-  const [notifications, setNotifications] = useState<INotification[]>([])
+  const [notifications, setNotifications] = useState<INotification[]>([]);
 
-  useEffect(() => {
+  const fetchData = async () => {
+    const data = await getNotifications();
+    setNotifications(data);
+  }
 
-    const fetchData = async () => {
-      const data = await getNotifications();
-      setNotifications(data);
-    }
-
-    fetchData();
-  }, [])
+  const readNotification = async (id: string) => {
+    await readNotificationRequest(id);
+    await fetchData();
+  }
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger className="focus:outline-none" style={{ cursor: 'pointer' }}>
+      <DropdownMenuTrigger onPointerDown={() => fetchData()} className="focus:outline-none" style={{ cursor: 'pointer' }}>
         <Bell size="25" />
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-xs">
-
-        {notifications.map(item => (
-          <DropdownMenuItem key={item.id}>
-            <div className="flex p-1 space-x-2 items-center">
-              <LogIn />
-              <div className="text-start pl-2">
-                <p className="text-sm font-semibold">{item.title}</p>
-                <p dangerouslySetInnerHTML={{ __html: item.description }} className="text-xs text-muted-foreground break-normal" />
-              </div>
+        {
+          notifications.length ? (
+            notifications.map(item => (
+              <DropdownMenuItem key={item.id} onClick={e => e.preventDefault()}>
+                <div className="flex p-1 space-x-2 items-center">
+                  <LogIn />
+                  <div className="text-start pl-2">
+                    <p className="text-sm font-semibold">{item.title}</p>
+                    <p dangerouslySetInnerHTML={{ __html: item.description }} className="text-xs text-muted-foreground break-normal" />
+                  </div>
+                  <Button variant="secondary" onClick={() => readNotification(item.id)} title="Mark as read">
+                    <CheckCheck color="green" />
+                  </Button>
+                </div>
+              </DropdownMenuItem>
+            ))
+          ) : (
+            <div className="text-center justify-center py-2">
+              <span className="text-sm text-gray-500 ">No notifications</span>
             </div>
-          </DropdownMenuItem>
-        ))}
-
+          )
+        }
       </DropdownMenuContent>
     </DropdownMenu>
   )

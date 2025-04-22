@@ -47,7 +47,6 @@ api.interceptors.response.use(
         const response = await refreshTokenRequest();
 
         if (response) {
-          console.log(response);
           const { access, refresh } = response;
           localStorage.setItem("accessToken", access);
           localStorage.setItem("refreshToken", refresh);
