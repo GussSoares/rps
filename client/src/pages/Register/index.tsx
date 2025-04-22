@@ -4,6 +4,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { RegisterForm } from "@/components/RegisterForm";
+import { Separator } from "@/components/ui/separator";
 
 export function Register() {
 	const navigate = useNavigate();
@@ -23,7 +24,8 @@ export function Register() {
 					<Card>
 						<CardHeader>
 							<CardTitle>Sign Up</CardTitle>
-							<CardDescription>Make the login to enter in the system</CardDescription>
+							<CardDescription>Register now to sign in the system</CardDescription>
+							<Separator className="mt-2" />
 						</CardHeader>
 						<CardContent>
 							<RegisterForm />

@@ -35,6 +35,22 @@ type IUser = {
   last_name: string;
   email: string;
   is_superuser: boolean;
+  phone: string | undefined;
+  gender: string | undefined;
+  country: string | undefined;
+  city: string | undefined;
+  state: string | undefined;
+}
+
+type IEditUser = {
+  firstName: string | undefined;
+  lastName: string | undefined;
+  email: string | undefined;
+  phone: string | undefined;
+  gender: string | undefined;
+  country: string | undefined;
+  city: string | undefined;
+  state: string | undefined;
 }
 
 export type {
@@ -42,5 +58,6 @@ export type {
   ILogin,
   IRefreshToken,
   IRegister,
-  IUser
+  IUser,
+  IEditUser
 };

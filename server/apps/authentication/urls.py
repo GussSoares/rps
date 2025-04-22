@@ -14,7 +14,7 @@ auth_urls = [
 ]
 
 user_urls = [
-    path('user/', UserViewSet.as_view({"get": "get"})),
+    path('user/', UserViewSet.as_view({"get": "get", "patch": "patch"})),
 ]
 
 urlpatterns = [

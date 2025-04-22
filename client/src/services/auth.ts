@@ -1,4 +1,4 @@
-import { ILogin, IRegister } from "@/hooks/types";
+import { IEditUser, ILogin, IRegister } from "@/hooks/types";
 import { api } from "@/services/api";
 
 export const loginRequest = ({ username, password }: ILogin) => {
@@ -14,7 +14,23 @@ export const loginWithGoogleRequest = async (code: string) => {
     const response = await api.request({
       method: 'POST',
       data: { code },
-      url: 'auth/login/google'
+      url: 'auth/login/google/'
+    });
+    return response.data;
+  } catch (err: any) {
+    if (err.response) {
+      throw new Error(`Erro ${err.response.status}`);
+    }
+    throw new Error(`Ocorreu um erro inesperado.`);
+  }
+}
+
+export const loginWithGithubRequest = async (code: string) => {
+  try {
+    const response = await api.request({
+      method: 'POST',
+      data: { code },
+      url: 'auth/login/github/'
     });
     return response.data;
   } catch (err: any) {
@@ -69,6 +85,24 @@ export const userRequest = async () => {
   const response = await api.request({
     method: 'GET',
     url: 'auth/user/'
+  });
+  return response.data;
+}
+
+export const editUserRequest = async (user: IEditUser) => {
+  const response = await api.request({
+    method: 'PATCH',
+    url: 'auth/user/',
+    data: {
+      first_name: user.firstName,
+      last_name: user.lastName,
+      email: user.email,
+      phone: user.phone,
+      gender: user.gender,
+      country: user.country,
+      city: user.city,
+      state: user.state,
+    }
   });
   return response.data;
 }

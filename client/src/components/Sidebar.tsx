@@ -11,6 +11,7 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar"
 import { Link, useLocation } from "react-router-dom"
+import { Separator } from "./ui/separator"
 
 // Menu items.
 const items = [
@@ -48,6 +49,7 @@ export function AppSidebar() {
     <Sidebar variant="floating">
       <SidebarHeader className="p-4 bg-white rounded-t-xl">
         <h1>RPS</h1>
+        <Separator />
       </SidebarHeader>
       <SidebarContent className="bg-white rounded-b-xl">
         <SidebarGroup>

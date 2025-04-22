@@ -61,3 +61,9 @@ class RegisterSerializer(serializers.ModelSerializer):
         user.set_password(user.password)
         user.save()
         return user
+
+
+class EditUserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        exclude = ('password', 'username')

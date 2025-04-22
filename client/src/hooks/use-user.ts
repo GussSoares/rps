@@ -15,7 +15,7 @@ export const useUser = () => {
         setLoading(true);
         const userData = await userRequest();
         setUser(userData);
-      } catch (err) {
+      } catch (err: any) {
         setError(err.message);
       } finally {
         setLoading(false);

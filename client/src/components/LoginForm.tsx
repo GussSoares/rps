@@ -17,7 +17,7 @@ import { PasswordInput } from "./ui/input-password";
 import { Separator } from "./ui/separator";
 import { useGoogleLogin } from "@react-oauth/google";
 import { toast } from "sonner";
-// import jwt_decode from "jwt-decode";
+import { useNavigate } from "react-router-dom";
 
 const loginSchema = z.object({
 	username: z.string().min(7, "Must be greater 7 characters"),
@@ -27,8 +27,8 @@ const loginSchema = z.object({
 
 type createUserFormData = z.infer<typeof loginSchema>
 
-export function LoginForm() {
-	const { login, loading, loginWithGoogle } = useAuth();
+const GoogleButton = () => {
+	const { loginWithGoogle, loading } = useAuth();
 	const handlerLoginWithGoogle = useGoogleLogin({
 		flow: "auth-code",
 		onSuccess: tokenResponse => {
@@ -39,6 +39,63 @@ export function LoginForm() {
 		}
 	});
 
+	return (
+		<Button disabled={loading} onClick={() => handlerLoginWithGoogle()} type="button" variant="secondary" style={{ cursor: "pointer" }}>
+			{loading && <Loader2 className="animate-spin" />}
+			{/* <img src="https://developers.google.com/identity/images/g-logo.png" alt="google" style={{ width: 20, height: 20 }} /> */}
+			<img src="https://img.icons8.com/fluency/48/google-logo.png" alt="google" style={{ width: 20, height: 20 }} />
+			Google
+		</Button>
+	)
+}
+
+const GithubButton = () => {
+	const navigate = useNavigate();
+	const { loginWithGithub, loading } = useAuth();
+	const clientId = import.meta.env.VITE_GITHUB_CLIENT_ID;
+	const redirectUrl = `${window.location.origin}/popup-callback.html`;
+
+	const handleLogin = () => {
+		let handled = false;
+
+		window.open(
+			`https://github.com/login/oauth/authorize?client_id=${clientId}&redirect_uri=${redirectUrl}&scope=user`,
+			'Github Login',
+			'width=600,height=700'
+		)
+
+		const receiveMessage = async (event: any) => {
+			if (event.origin !== window.origin) return;
+			if (handled) return;
+
+			const { type, code } = event.data || {};
+			if (type === 'github-code' && code) {
+				handled = true;
+				window.removeEventListener('message', receiveMessage);
+
+				try {
+					loginWithGithub(code)
+					navigate('/')
+				} catch (err) {
+					console.log(err);
+				}
+
+				window.removeEventListener('message', receiveMessage);
+			}
+		}
+		window.addEventListener('message', receiveMessage);
+	}
+
+	return (
+		<Button disabled={loading} onClick={handleLogin} type="button" variant="secondary" style={{ cursor: "pointer" }}>
+			{loading && <Loader2 className="animate-spin" />}
+			<Github /> GitHub
+		</Button>
+	)
+}
+
+export function LoginForm() {
+	const { login, loading } = useAuth();
 
 	const form = useForm<createUserFormData>({
 		resolver: zodResolver(loginSchema)
@@ -101,13 +158,8 @@ export function LoginForm() {
 							<Separator className="flex-1" />
 						</div>
 						<div className="grid grid-cols-2 gap-2 pb-3">
-							<Button onClick={() => handlerLoginWithGoogle()} type="button" variant="secondary" style={{cursor: "pointer"}}>
-								<img src="https://developers.google.com/identity/images/g-logo.png" alt="google" style={{ width: 20, height: 20 }} />
-								Google
-							</Button>
-							<Button disabled type="button" variant="secondary">
-								<Github /> GitHub
-							</Button>
+							<GoogleButton />
+							<GithubButton />
 						</div>
 					</div>
 				</form>

@@ -11,6 +11,10 @@ from rest_framework_simplejwt.tokens import RefreshToken
 from apps.authentication import serializers
 from apps.authentication.authentication import JWTAuthentication
 from apps.authentication.google import GoogleClient
+from apps.authentication.github import GithubClient
+from rps_server.decorators import websocket_notify_decorator
+from apps.notifications.enums import NotificationTypes
+from apps.notifications.utils import NotificationUtil
 
 
 class PublicViewSet(ViewSet):
@@ -70,6 +74,7 @@ class AuthViewSet(PublicViewSet):
 
 
 class AuthWithGoogleViewSet(PublicViewSet):
+    @websocket_notify_decorator
     def login(self, request):
         serializer = serializers.LoginWithGoogleSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
@@ -85,6 +90,12 @@ class AuthWithGoogleViewSet(PublicViewSet):
         user, _ = User.objects.get_or_create(email=email, defaults={"username": email, "first_name": name})
 
         refresh = RefreshToken.for_user(user)
+        NotificationUtil.create(
+            title='Usuário logado',
+            description=f'Usuário <b>{user.get_full_name()}</b> logou via Google em {datetime.now().strftime("%d/%m/%Y")}',
+            user_id=user.id,
+            type_id=NotificationTypes.LOGIN.value
+        )
         return Response({
             "access": str(refresh.access_token),
             "refresh": str(refresh),
@@ -92,21 +103,30 @@ class AuthWithGoogleViewSet(PublicViewSet):
 
 
 class AuthWithGithubViewSet(PublicViewSet):
+
+    @websocket_notify_decorator
     def login(self, request):
         serializer = serializers.LoginWithGithubSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
 
         User = get_user_model()
 
-        access_token = GoogleClient.get_token(code=serializer.data['code'])
-        user_info = GoogleClient.get_user_info(access_token=access_token)
+        access_token = GithubClient.get_token(code=serializer.data['code'])
+        user_info = GithubClient.get_user_info(access_token=access_token)
 
         email = user_info["email"]
-        name = user_info.get("name", email)
+        username = user_info.get("login", email)
 
-        user, _ = User.objects.get_or_create(email=email, defaults={"username": email, "first_name": name})
+        user, _ = User.objects.get_or_create(email=email, defaults={"username": username, "first_name": username})
 
         refresh = RefreshToken.for_user(user)
+
+        NotificationUtil.create(
+            title='Usuário logado',
+            description=f'Usuário <b>{user.get_full_name()}</b> logou via Github em {datetime.now().strftime("%d/%m/%Y")}',
+            user_id=user.id,
+            type_id=NotificationTypes.LOGIN.value
+        )
         return Response({
             "access": str(refresh.access_token),
             "refresh": str(refresh),
@@ -116,3 +136,10 @@ class AuthWithGithubViewSet(PublicViewSet):
 class UserViewSet(ViewSet):
     def get(self, request: Request):
         return Response(serializers.UserSerializer(request.user).data, status=status.HTTP_200_OK)
+
+    def patch(self, request: Request):
+        serializer = serializers.EditUserSerializer(request.user, data=request.data)
+        serializer.is_valid(raise_exception=True)
+        user = serializer.save()
+
+        return Response(serializers.UserSerializer(user).data, status=status.HTTP_200_OK)

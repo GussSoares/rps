@@ -5,6 +5,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Command } from "lucide-react";
+import { Separator } from "@/components/ui/separator";
 
 export function Login() {
 	const navigate = useNavigate();
@@ -29,6 +30,7 @@ export function Login() {
 						<CardHeader>
 							<CardTitle>Sign In</CardTitle>
 							<CardDescription>Make the sign in to enter in the system</CardDescription>
+						<Separator className="mt-2" />
 						</CardHeader>
 						<CardContent>
 							<LoginForm />

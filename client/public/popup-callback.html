@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>GitHub Auth Callback</title>
+  </head>
+  <body>
+    <script>
+      const params = new URLSearchParams(window.location.search);
+      const code = params.get('code');
+
+      if (code && window.opener) {
+        window.opener.postMessage({ type: 'github-code', code }, window.origin);
+        window.close();
+      }
+    </script>
+  </body>
+</html>

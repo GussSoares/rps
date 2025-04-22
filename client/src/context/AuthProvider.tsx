@@ -1,5 +1,5 @@
 import { IRegister, IUser } from "@/hooks/types";
-import { loginRequest, loginWithGoogleRequest, logoutRequest, registerRequest, userRequest } from "@/services/auth";
+import { loginRequest, loginWithGithubRequest, loginWithGoogleRequest, logoutRequest, registerRequest, userRequest } from "@/services/auth";
 import { createContext, ReactNode, useContext, useEffect, useMemo, useState } from "react";
 import { toast } from "sonner";
 
@@ -8,8 +8,10 @@ type UserContextType = {
 	user: IUser | null;
 	login: (username: string, password: string) => Promise<any>;
 	loginWithGoogle: (code: string) => Promise<any>;
+	loginWithGithub: (code: string) => Promise<any>;
 	register: (data: IRegister) => Promise<any>;
 	logout: () => void;
+	setUser: (data: IUser) => void;
 	isLogged: boolean;
 	loading: boolean;
 };
@@ -34,7 +36,7 @@ export const UserProvider = ({ children }: Props) => {
 		if (!window.location.href.includes('/login')) {
 			window.location.assign("/login");
 		}
-	}, [])
+	}, [user])
 
 	const register = async (data: IRegister) => {
 		setLoading(true);
@@ -93,6 +95,7 @@ export const UserProvider = ({ children }: Props) => {
 
 	const loginWithGoogle = async (code: string) => {
 		try {
+			setLoading(true);
 			const data = await loginWithGoogleRequest(code);
 			localStorage.setItem("accessToken", data.access);
 			localStorage.setItem("refreshToken", data.refresh);
@@ -103,6 +106,26 @@ export const UserProvider = ({ children }: Props) => {
 		} catch (err: any) {
 			console.log(err);
 			toast.error(err.response.data.message, { position: 'top-center', richColors: true });
+		} finally {
+			setLoading(false);
+		}
+	}
+
+	const loginWithGithub = async (code: string) => {
+		try {
+			setLoading(true);
+			const data = await loginWithGithubRequest(code);
+			localStorage.setItem("accessToken", data.access);
+			localStorage.setItem("refreshToken", data.refresh);
+			setToken(data.access);
+			getUserData()
+			toast.success("Login Successed!", { position: 'top-center', richColors: true });
+
+		} catch (err: any) {
+			console.log(err);
+			toast.error(err.response.data.message, { position: 'top-center', richColors: true });
+		} finally {
+			setLoading(false);
 		}
 	}
 
@@ -116,7 +139,7 @@ export const UserProvider = ({ children }: Props) => {
 	}, [token]);
 
 	return (
-		<UserContext.Provider value={{ login, logout, register, token, isLogged, loading, user, loginWithGoogle }}>
+		<UserContext.Provider value={{ login, logout, register, token, isLogged, loading, user, loginWithGoogle, loginWithGithub, setUser }}>
 			{children}
 		</UserContext.Provider>
 	)
