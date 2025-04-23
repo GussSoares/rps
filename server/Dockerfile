@@ -31,7 +31,7 @@ COPY pyproject.toml poetry.lock README.md /usr/src/app/
 # RUN poetry config virtualenvs.in-project true --local
 RUN poetry install --no-interaction --no-ansi --with dev --no-root
 
-# COPY . /usr/src/app/
+COPY . /usr/src/app/
 
 RUN addgroup --gid 1000 ${USERNAME} && \
     adduser -u 1000 --system --home "${HOME_PATH}" --shell /sbin/nologin --ingroup rps "${USERNAME}" && \
