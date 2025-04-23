@@ -1,4 +1,4 @@
-import { ChartArea, Users2, LayoutGrid } from "lucide-react"
+import { ChartArea, Users2, LayoutGrid, ShieldBan, Wrench } from "lucide-react"
 
 import {
   Sidebar,
@@ -25,16 +25,26 @@ const items = [
     url: "/dashboard",
     icon: ChartArea,
   },
+  // {
+  //   title: "Users",
+  //   url: "/users",
+  //   icon: Users2,
+  // },
   {
-    title: "Users",
-    url: "/users",
+    title: "Clients",
+    url: "/clients",
     icon: Users2,
   },
-  // {
-  //   title: "Search",
-  //   url: "#",
-  //   icon: Search,
-  // },
+  {
+    title: "Services",
+    url: "/services",
+    icon: Wrench,
+  },
+  {
+    title: "Administrator",
+    url: "/administrator",
+    icon: ShieldBan,
+  },
   // {
   //   title: "Settings",
   //   url: "#",

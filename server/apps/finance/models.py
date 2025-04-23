@@ -26,11 +26,11 @@ class BillType(models.IntegerChoices):
 
 class Bill(BaseUUIDModel):
     description = models.CharField(max_length=200, null=True)
-    type = models.IntegerField(max_length=1, choices=BillType.choices, default=BillType.TO_PAY.value)
+    type = models.IntegerField(choices=BillType.choices, default=BillType.TO_PAY.value)
     client = models.ForeignKey(to=Client, on_delete=models.SET_NULL, null=True)
     service = models.ForeignKey(to=Service, on_delete=models.SET_NULL, null=True)
-    value = models.DecimalField(decimal_places=2)
-    paid_value = models.DecimalField(decimal_places=2, null=True)
-    payment_method = models.IntegerField(max_length=1, choices=PaymentMethod.choices, default=PaymentMethod.CASH.value)
-    payment_status = models.IntegerField(max_length=1, choices=PaymentStatus.choices, default=PaymentStatus.PENDING.value)
+    value = models.DecimalField(decimal_places=2, max_digits=10)
+    paid_value = models.DecimalField(decimal_places=2, max_digits=10, null=True)
+    payment_method = models.IntegerField(choices=PaymentMethod.choices, default=PaymentMethod.CASH.value)
+    payment_status = models.IntegerField(choices=PaymentStatus.choices, default=PaymentStatus.PENDING.value)
     payment_status_date = models.DateTimeField(null=True)

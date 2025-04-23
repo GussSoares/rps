@@ -1,0 +1,361 @@
+[
+    {
+        "model": "client.client",
+        "pk": "261dfaf0-65ae-483c-b77e-64f2e51108d0",
+        "fields": {
+            "created_at": "2025-04-23T19:54:09.632",
+            "updated_at": "2025-04-23T19:54:09.632",
+            "name": "MICHAEL MORRISON",
+            "phone": "5589927567659",
+            "active": false
+        }
+    },
+    {
+        "model": "client.client",
+        "pk": "2f547863-077d-49af-a129-05fbbbb5a3a1",
+        "fields": {
+            "created_at": "2025-04-23T19:54:09.633",
+            "updated_at": "2025-04-23T19:54:09.633",
+            "name": "SHEILA CARPENTER",
+            "phone": "5557968332907",
+            "active": true
+        }
+    },
+    {
+        "model": "client.client",
+        "pk": "391a2864-0cd2-478d-8d9e-21aa70fdb3dc",
+        "fields": {
+            "created_at": "2025-04-23T19:54:09.635",
+            "updated_at": "2025-04-23T19:54:09.635",
+            "name": "JOHN MOORE",
+            "phone": "5500940583317",
+            "active": false
+        }
+    },
+    {
+        "model": "client.client",
+        "pk": "613c1e23-e920-4819-99eb-96428b8283fe",
+        "fields": {
+            "created_at": "2025-04-23T19:54:09.635",
+            "updated_at": "2025-04-23T19:54:09.635",
+            "name": "JORDAN JOHNSON",
+            "phone": "5552955393935",
+            "active": false
+        }
+    },
+    {
+        "model": "client.client",
+        "pk": "97f1bf66-8596-427a-a7ef-fbeda9510a05",
+        "fields": {
+            "created_at": "2025-04-23T19:54:09.633",
+            "updated_at": "2025-04-23T19:54:09.633",
+            "name": "ELIZABETH ROBERTSON",
+            "phone": "55034932309831",
+            "active": true
+        }
+    },
+    {
+        "model": "client.client",
+        "pk": "a8c30718-a43b-4b90-aa2d-4bfa8aef9815",
+        "fields": {
+            "created_at": "2025-04-23T19:54:09.636",
+            "updated_at": "2025-04-23T19:54:09.636",
+            "name": "BRIAN WALKER",
+            "phone": "5508964719062",
+            "active": true
+        }
+    },
+    {
+        "model": "client.client",
+        "pk": "b1e8f1da-90d5-4928-8782-44c9abe66f54",
+        "fields": {
+            "created_at": "2025-04-23T19:54:09.634",
+            "updated_at": "2025-04-23T19:54:09.634",
+            "name": "SHERYL SMITH",
+            "phone": "5559919876096",
+            "active": false
+        }
+    },
+    {
+        "model": "client.client",
+        "pk": "b2deb1f7-23ed-4aee-a9f3-412659e34619",
+        "fields": {
+            "created_at": "2025-04-23T19:54:09.635",
+            "updated_at": "2025-04-23T19:54:09.635",
+            "name": "MICHELLE MOSES",
+            "phone": "5509903559620",
+            "active": false
+        }
+    },
+    {
+        "model": "client.client",
+        "pk": "bc98a417-185d-431f-8db5-70441a68dbde",
+        "fields": {
+            "created_at": "2025-04-23T19:54:09.634",
+            "updated_at": "2025-04-23T19:54:09.634",
+            "name": "CHARLES PERRY",
+            "phone": "5545989111571",
+            "active": false
+        }
+    },
+    {
+        "model": "client.client",
+        "pk": "bf090a31-d6d7-4cdd-91d3-fc9fa4a2f5be",
+        "fields": {
+            "created_at": "2025-04-23T19:54:09.634",
+            "updated_at": "2025-04-23T19:54:09.634",
+            "name": "KRISTEN CONWAY",
+            "phone": "5594943858386",
+            "active": false
+        }
+    },{
+        "model": "service.service",
+        "pk": "bf090a31-d6d7-4cdd-91d3-fc9fa4a2f5be",
+        "fields": {
+            "created_at": "2025-04-23T19:54:09.634",
+            "updated_at": "2025-04-23T19:54:09.634",
+            "name": "Retífica de Motores",
+            "active": true
+        }
+    },
+    {
+        "model": "service.service",
+        "pk": "bf090a31-d6d7-4cdd-91d3-fc9fa4a2f5bf",
+        "fields": {
+            "created_at": "2025-04-23T19:54:09.634",
+            "updated_at": "2025-04-23T19:54:09.634",
+            "name": "Retífica de Cabeçotes",
+            "active": true
+        }
+    },
+    {
+        "model": "service.service",
+        "pk": "bf090a31-d6d7-4cdd-91d3-fc9fa4a2f5c0",
+        "fields": {
+            "created_at": "2025-04-23T19:54:09.634",
+            "updated_at": "2025-04-23T19:54:09.634",
+            "name": "Retífica de Virabrequim",
+            "active": true
+        }
+    },
+    {
+        "model": "service.service",
+        "pk": "bf090a31-d6d7-4cdd-91d3-fc9fa4a2f5c1",
+        "fields": {
+            "created_at": "2025-04-23T19:54:09.634",
+            "updated_at": "2025-04-23T19:54:09.634",
+            "name": "Retífica de Bloco de Motor",
+            "active": true
+        }
+    },
+    {
+        "model": "service.service",
+        "pk": "bf090a31-d6d7-4cdd-91d3-fc9fa4a2f5c2",
+        "fields": {
+            "created_at": "2025-04-23T19:54:09.634",
+            "updated_at": "2025-04-23T19:54:09.634",
+            "name": "Plaina de Cabeçote",
+            "active": true
+        }
+    },
+    {
+        "model": "service.service",
+        "pk": "bf090a31-d6d7-4cdd-91d3-fc9fa4a2f5c3",
+        "fields": {
+            "created_at": "2025-04-23T19:54:09.634",
+            "updated_at": "2025-04-23T19:54:09.634",
+            "name": "Montagem de Motor",
+            "active": true
+        }
+    },
+    {
+        "model": "service.service",
+        "pk": "bf090a31-d6d7-4cdd-91d3-fc9fa4a2f5c4",
+        "fields": {
+            "created_at": "2025-04-23T19:54:09.634",
+            "updated_at": "2025-04-23T19:54:09.634",
+            "name": "Honeamento de Cilindros",
+            "active": true
+        }
+    },
+    {
+        "model": "service.service",
+        "pk": "bf090a31-d6d7-4cdd-91d3-fc9fa4a2f5c5",
+        "fields": {
+            "created_at": "2025-04-23T19:54:09.634",
+            "updated_at": "2025-04-23T19:54:09.634",
+            "name": "Reparação de Bielas",
+            "active": true
+        }
+    },
+    {
+        "model": "service.service",
+        "pk": "bf090a31-d6d7-4cdd-91d3-fc9fa4a2f5c6",
+        "fields": {
+            "created_at": "2025-04-23T19:54:09.634",
+            "updated_at": "2025-04-23T19:54:09.634",
+            "name": "Solda de Alumínio em Cabeçotes",
+            "active": true
+        }
+    },
+    {
+        "model": "service.service",
+        "pk": "bf090a31-d6d7-4cdd-91d3-fc9fa4a2f5c7",
+        "fields": {
+            "created_at": "2025-04-23T19:54:09.634",
+            "updated_at": "2025-04-23T19:54:09.634",
+            "name": "Alinhamento de Virabrequim",
+            "active": true
+        }
+    },
+    {
+        "model": "service.service",
+        "pk": "bf090a31-d6d7-4cdd-91d3-fc9fa4a2f5c8",
+        "fields": {
+            "created_at": "2025-04-23T19:54:09.634",
+            "updated_at": "2025-04-23T19:54:09.634",
+            "name": "Recondicionamento de Válvulas",
+            "active": true
+        }
+    },
+    {
+        "model": "service.service",
+        "pk": "bf090a31-d6d7-4cdd-91d3-fc9fa4a2f5c9",
+        "fields": {
+            "created_at": "2025-04-23T19:54:09.634",
+            "updated_at": "2025-04-23T19:54:09.634",
+            "name": "Troca de Guias e Sedes de Válvulas",
+            "active": true
+        }
+    },
+    {
+        "model": "service.service",
+        "pk": "bf090a31-d6d7-4cdd-91d3-fc9fa4a2f5ca",
+        "fields": {
+            "created_at": "2025-04-23T19:54:09.634",
+            "updated_at": "2025-04-23T19:54:09.634",
+            "name": "Furação e Rosqueamento",
+            "active": true
+        }
+    },
+    {
+        "model": "service.service",
+        "pk": "bf090a31-d6d7-4cdd-91d3-fc9fa4a2f5cb",
+        "fields": {
+            "created_at": "2025-04-23T19:54:09.634",
+            "updated_at": "2025-04-23T19:54:09.634",
+            "name": "Usinagem de Volante do Motor",
+            "active": true
+        }
+    },
+    {
+        "model": "service.service",
+        "pk": "bf090a31-d6d7-4cdd-91d3-fc9fa4a2f5cc",
+        "fields": {
+            "created_at": "2025-04-23T19:54:09.634",
+            "updated_at": "2025-04-23T19:54:09.634",
+            "name": "Balanceamento de Virabrequim",
+            "active": true
+        }
+    },
+    {
+        "model": "service.service",
+        "pk": "bf090a31-d6d7-4cdd-91d3-fc9fa4a2f5cd",
+        "fields": {
+            "created_at": "2025-04-23T19:54:09.634",
+            "updated_at": "2025-04-23T19:54:09.634",
+            "name": "Aplainamento de Coletor de Admissão/Escape",
+            "active": true
+        }
+    },
+    {
+        "model": "service.service",
+        "pk": "bf090a31-d6d7-4cdd-91d3-fc9fa4a2f5ce",
+        "fields": {
+            "created_at": "2025-04-23T19:54:09.634",
+            "updated_at": "2025-04-23T19:54:09.634",
+            "name": "Teste Hidrostático de Cabeçotes",
+            "active": true
+        }
+    },
+    {
+        "model": "service.service",
+        "pk": "bf090a31-d6d7-4cdd-91d3-fc9fa4a2f5cf",
+        "fields": {
+            "created_at": "2025-04-23T19:54:09.634",
+            "updated_at": "2025-04-23T19:54:09.634",
+            "name": "Rebaixamento de Cabeçote",
+            "active": true
+        }
+    },
+    {
+        "model": "service.service",
+        "pk": "bf090a31-d6d7-4cdd-91d3-fc9fa4a2f5d0",
+        "fields": {
+            "created_at": "2025-04-23T19:54:09.634",
+            "updated_at": "2025-04-23T19:54:09.634",
+            "name": "Soldagem e Recuperação de Blocos Trincados",
+            "active": true
+        }
+    },
+    {
+        "model": "service.service",
+        "pk": "bf090a31-d6d7-4cdd-91d3-fc9fa4a2f5d1",
+        "fields": {
+            "created_at": "2025-04-23T19:54:09.634",
+            "updated_at": "2025-04-23T19:54:09.634",
+            "name": "Limpeza Química de Peças",
+            "active": true
+        }
+    },
+    {
+        "model": "service.service",
+        "pk": "bf090a31-d6d7-4cdd-91d3-fc9fa4a2f5d2",
+        "fields": {
+            "created_at": "2025-04-23T19:54:09.634",
+            "updated_at": "2025-04-23T19:54:09.634",
+            "name": "Análise Técnica e Laudo de Componentes",
+            "active": true
+        }
+    },
+    {
+        "model": "service.service",
+        "pk": "bf090a31-d6d7-4cdd-91d3-fc9fa4a2f5d3",
+        "fields": {
+            "created_at": "2025-04-23T19:54:09.634",
+            "updated_at": "2025-04-23T19:54:09.634",
+            "name": "Montagem Parcial de Cabeçotes",
+            "active": true
+        }
+    },
+    {
+        "model": "service.service",
+        "pk": "bf090a31-d6d7-4cdd-91d3-fc9fa4a2f5d4",
+        "fields": {
+            "created_at": "2025-04-23T19:54:09.634",
+            "updated_at": "2025-04-23T19:54:09.634",
+            "name": "Polimento de Virabrequim",
+            "active": true
+        }
+    },
+    {
+        "model": "service.service",
+        "pk": "bf090a31-d6d7-4cdd-91d3-fc9fa4a2f5d5",
+        "fields": {
+            "created_at": "2025-04-23T19:54:09.634",
+            "updated_at": "2025-04-23T19:54:09.634",
+            "name": "Ajuste de Altura de Pistões",
+            "active": true
+        }
+    },
+    {
+        "model": "service.service",
+        "pk": "bf090a31-d6d7-4cdd-91d3-fc9fa4a2f5d6",
+        "fields": {
+            "created_at": "2025-04-23T19:54:09.634",
+            "updated_at": "2025-04-23T19:54:09.634",
+            "name": "Serviço de Torno e Fresa",
+            "active": true
+        }
+    }
+]

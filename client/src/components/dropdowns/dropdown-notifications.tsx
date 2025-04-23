@@ -1,4 +1,4 @@
-import { Bell, CheckCheck, LogIn } from "lucide-react"
+import { Bell, BellDot, CheckCheck, LogIn } from "lucide-react"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "../ui/dropdown-menu"
 import { getNotifications, readNotificationRequest } from "@/services/notifications"
 import { useState } from "react"
@@ -26,7 +26,11 @@ export const DropdownNotifications = () => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger onPointerDown={() => fetchData()} className="focus:outline-none" style={{ cursor: 'pointer' }}>
-        <Bell size="25" />
+        {
+          notifications.length
+            ? <BellDot size="25" />
+            : <Bell size="25" />
+        }
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-xs">
         {

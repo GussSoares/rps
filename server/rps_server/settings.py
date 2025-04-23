@@ -46,9 +46,12 @@ INSTALLED_APPS = [
     'drf_yasg',
     'corsheaders',
 
+    'rps_server',
     'apps.authentication',
     'apps.service',
-    'apps.notifications'
+    'apps.notifications',
+    'apps.client',
+    'apps.finance'
 ]
 
 MIDDLEWARE = [
@@ -120,7 +123,6 @@ CACHES = {
 
 
 SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(seconds=10),
     # 'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=1),
     'SLIDING_TOKEN_LIFETIME': timedelta(days=30),
     'SLIDING_TOKEN_REFRESH_LIFETIME_LATE_USER': timedelta(days=1),

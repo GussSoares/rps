@@ -9,6 +9,11 @@ type RouteMap = {
   users: Crumb;
   home: Crumb;
   dashboard: Crumb;
+  administrator: Crumb;
+  clients: Crumb;
+  services: Crumb;
+  profile: Crumb;
+  notifications: Crumb;
 };
 
 const BREADCRUMB: RouteMap = {
@@ -27,7 +32,27 @@ const BREADCRUMB: RouteMap = {
   dashboard: {
     path: '/dashboard',
     label: 'Dashboard'
-  }
+  },
+  administrator: {
+    path: '/administrator',
+    label: 'Administração'
+  },
+  services: {
+    path: '/services',
+    label: 'Serviços'
+  },
+  clients: {
+    path: '/clients',
+    label: 'Clientes'
+  },
+  profile: {
+    path: '/user/profile',
+    label: 'Perfil'
+  },
+  notifications: {
+    path: '/user/notiifications',
+    label: 'Notificações'
+  },
 }
 
 
