@@ -1,6 +1,5 @@
 import factory
 import faker
-import re
 
 from apps.service.models import Service
 
@@ -19,4 +18,4 @@ class ServiceFactory(factory.django.DjangoModelFactory):
 
     class Meta:
         model = Service
-    
+        django_get_or_create = ('name',)

@@ -20,8 +20,7 @@ export const Header = (props: React.HTMLAttributes<HTMLElement>) => {
   }
 
   return (
-    <header className="top-0 left-0 w-full py-4 px-4 z-50 flex justify-between items-center" {...props}>
-
+    <header className="w-full py-4 px-4 flex justify-between items-center" {...props}>
       <div className="flex gap-5">
         <Button variant="outline" asChild style={{ cursor: "pointer" }}>
           <SidebarTrigger />

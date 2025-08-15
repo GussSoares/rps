@@ -5,6 +5,11 @@ import { Dashboard, Login, Home, User, Register, Clients, Services, Administrato
 import { ListUser } from "./pages/User/List";
 import { Profile } from "./pages/User/Profile";
 import { Notifications } from "./pages/User/Notifications";
+import { Finance } from "./pages/Finance";
+import { ToPay } from "./pages/Finance/ToPay";
+import { ToReceive } from "./pages/Finance/ToReceive";
+import { RegisterClient } from "./pages/Clients/register-client";
+import { ListClients } from "./pages/Clients/list-clients";
 
 
 export const router = createBrowserRouter([
@@ -21,9 +26,20 @@ export const router = createBrowserRouter([
         ]
       },
       { path: "users", Component: ListUser },
-      { path: "clients", Component: Clients },
+      {
+        path: "clients", Component: Clients, children: [
+          { index: true, Component: ListClients },
+          { path: "register", Component: RegisterClient },
+        ]
+      },
       { path: "services", Component: Services },
-      { path: "administrator", Component: Administrator }
+      { path: "administrator", Component: Administrator },
+      {
+        path: "finances", Component: Finance, children: [
+          { path: "to-pay", Component: ToPay },
+          { path: "to-receive", Component: ToReceive },
+        ]
+      },
     ],
   },
   {

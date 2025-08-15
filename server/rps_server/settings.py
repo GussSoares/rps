@@ -78,6 +78,7 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.SessionAuthentication',
         # 'rest_framework.authentication.BasicAuthentication',
     ),
+    'DEFAULT_PAGINATION_CLASS': 'rps_server.pagination.CustomPagination',
 }
 
 ROOT_URLCONF = 'rps_server.urls'

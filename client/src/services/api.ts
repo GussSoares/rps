@@ -1,6 +1,7 @@
 import axios from "axios";
 import { toast } from "sonner";
 import { refreshTokenRequest } from "./auth";
+import { string } from "zod";
 
 export const api = axios.create({
   baseURL: 'http://127.0.0.1:8000/api/v0',
@@ -30,10 +31,7 @@ api.interceptors.response.use(
       localStorage.removeItem("accessToken");
       localStorage.removeItem("refreshToken");
       window.location.assign("/login");
-      toast.error("Token inválido", {
-        position: "top-center",
-        richColors: true
-      })
+      toast.error("Token inválido")
     }
 
     let refreshToken = localStorage.getItem("refreshToken");
@@ -56,6 +54,22 @@ api.interceptors.response.use(
           forceLogout()
         }
       }
+    } else {
+      let message = '';
+      if (error?.response?.message instanceof Array) {
+        message = error?.response?.message[0]
+      } else if (error?.response?.message instanceof string) {
+        message = error?.response?.message
+      } else if (error?.response?.status == 404) {
+        message = "Recurso não encontrado"
+      } else if (error?.response?.status == 403) {
+        message = "Acesso proibido"
+      } else if (error?.response?.status == 500) {
+        message = "Ocorreu um erro inesperado"
+      }
+      toast.error("Error", {
+        description: message
+      })
     }
     return Promise.reject(error);
   }

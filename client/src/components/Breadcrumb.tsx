@@ -14,6 +14,10 @@ type RouteMap = {
   services: Crumb;
   profile: Crumb;
   notifications: Crumb;
+  finances: Crumb;
+  'to-pay': Crumb;
+  'to-receive': Crumb;
+  register: Crumb;
 };
 
 const BREADCRUMB: RouteMap = {
@@ -53,6 +57,22 @@ const BREADCRUMB: RouteMap = {
     path: '/user/notiifications',
     label: 'Notificações'
   },
+  finances: {
+    path: '/finances',
+    label: 'Financeiro'
+  },
+  'to-pay': {
+    path: '/finances/to-pay',
+    label: 'Contas à Pagar'
+  },
+  'to-receive': {
+    path: '/finances/to-receive',
+    label: 'Contas à Receber'
+  },
+  register: {
+    path: '/clients/register',
+    label: 'Registrar'
+  }
 }
 
 

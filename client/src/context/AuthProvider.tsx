@@ -42,13 +42,13 @@ export const UserProvider = ({ children }: Props) => {
 		setLoading(true);
 		return await registerRequest(data)
 			.then(() => {
-				toast.success("Register Successed!", { position: 'top-center', richColors: true });
+				toast.success("Register Successed!");
 			})
 			.catch(err => {
 				if (err.response.status === 400) {
-					toast.error(JSON.stringify(err.response.data), { position: 'top-center', richColors: true });
+					toast.error(JSON.stringify(err.response.data));
 				} else {
-					toast.error("Ocorreu um erro inesperado.", { position: 'top-center', richColors: true });
+					toast.error("Ocorreu um erro inesperado.");
 				}
 			})
 			.finally(() => {
@@ -64,10 +64,10 @@ export const UserProvider = ({ children }: Props) => {
 				localStorage.setItem("refreshToken", res.data.refresh);
 				setToken(res.data.access);
 				getUserData()
-				toast.success("Login Successed!", { position: 'top-center', richColors: true });
+				toast.success("Login Successed!");
 			})
 			.catch(err => {
-				toast.error(err.response.data.message, { position: 'top-center', richColors: true });
+				toast.error(err.response.data.message);
 			})
 			.finally(() => {
 				setLoading(false);
@@ -82,14 +82,11 @@ export const UserProvider = ({ children }: Props) => {
 				localStorage.removeItem("refreshToken");
 				setToken(null);
 				// setRefresh(null);
-				toast.warning("Deslogado com sucesso", {
-					richColors: true,
-					position: "top-center"
-				})
+				toast.warning("Deslogado com sucesso")
 				// window.location.assign("/login");
 			})
 			.catch(err => {
-				toast.error(err.response.data.message, { position: 'top-center', richColors: true });
+				toast.error(err.response.data.message);
 			})
 	}
 
@@ -101,11 +98,11 @@ export const UserProvider = ({ children }: Props) => {
 			localStorage.setItem("refreshToken", data.refresh);
 			setToken(data.access);
 			getUserData()
-			toast.success("Login Successed!", { position: 'top-center', richColors: true });
+			toast.success("Login Successed!");
 
 		} catch (err: any) {
 			console.log(err);
-			toast.error(err.response.data.message, { position: 'top-center', richColors: true });
+			toast.error(err.response.data.message);
 		} finally {
 			setLoading(false);
 		}
@@ -119,11 +116,11 @@ export const UserProvider = ({ children }: Props) => {
 			localStorage.setItem("refreshToken", data.refresh);
 			setToken(data.access);
 			getUserData()
-			toast.success("Login Successed!", { position: 'top-center', richColors: true });
+			toast.success("Login Successed!");
 
 		} catch (err: any) {
 			console.log(err);
-			toast.error(err.response.data.message, { position: 'top-center', richColors: true });
+			toast.error(err.response.data.message);
 		} finally {
 			setLoading(false);
 		}

@@ -1,3 +1,4 @@
+import { Component } from "@/components/dashboard/donut-shart"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Skeleton } from "@/components/ui/skeleton"
@@ -45,7 +46,7 @@ export const Dashboard = () => {
 								</CardTitle>
 								<div className="pt-5">
 									<h1 className="text-2xl font-bold">
-										 
+
 										{
 											loading
 												? <Skeleton className="h-8 w-5/12 rounded-full" />
@@ -59,6 +60,9 @@ export const Dashboard = () => {
 						</Card>
 					)
 				})}
+			</div>
+			<div className="grid grid-cols-2 gap-3 pt-3">
+				<Component />
 			</div>
 		</>
 	)

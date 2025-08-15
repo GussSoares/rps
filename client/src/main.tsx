@@ -14,7 +14,7 @@ createRoot(document.getElementById('root')!).render(
   <GoogleOAuthProvider clientId={googleCLientId}>
     <UserProvider>
       <RouterProvider router={router} />
-      <Toaster />
+      <Toaster position='top-right' richColors />
     </UserProvider>
   </GoogleOAuthProvider>
   // </React.StrictMode>

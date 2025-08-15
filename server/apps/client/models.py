@@ -11,6 +11,7 @@ class ClientPaymentStatus(models.IntegerChoices):
 class Client(BaseUUIDModel):
     name = models.CharField(max_length=100)
     phone = models.CharField(max_length=11)
+    email = models.EmailField(max_length=50, null=True, default=None)
     active = models.BooleanField()
 
     def __repr__(self):

@@ -6,6 +6,9 @@ from drf_yasg import openapi
 
 from apps.authentication import urls as auth_urls
 from apps.notifications import urls as notification_urls
+from apps.client import urls as client_urls
+from apps.service import urls as service_urls
+from apps.finance import urls as finance_urls
 from rps_server.utils import get_version
 
 major, _, _ = get_version()
@@ -28,8 +31,10 @@ urls = [
     path('admin/', admin.site.urls),
     path('auth/', include(auth_urls)),
     path('notification/', include(notification_urls)),
-    
-    
+    path('client/', include(client_urls)),
+    path('service/', include(service_urls)),
+    path('finance/', include(finance_urls)),
+
     path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
 ]
 
